@@ -1,1 +1,22 @@
-[{"date":"2021-07-15","title":"Mystic River Falls","status":"opened","description":"A major new water ride replacing Lost River."}]
+{
+  "sdc": [
+    {
+      "title": "Time Traveler Coaster Opens",
+      "date": "2018-03-14",
+      "description": "Silver Dollar City debuted the world’s fastest, steepest, and tallest spinning coaster.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Time_Traveler_Roller_Coaster.jpg"
+    },
+    {
+      "title": "Mystic River Falls Opens",
+      "date": "2020-07-21",
+      "description": "A new river raft ride with a unique rotating lift tower opened to guests.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/9/92/Mystic_River_Falls_Silver_Dollar_City.jpg"
+    },
+    {
+      "title": "Fire In The Hole (New Version)",
+      "date": "2024-03-30",
+      "description": "The classic ride was rebuilt with modern animatronics and track for a new generation.",
+      "image": "https://www.silverdollarcity.com/wp-content/uploads/2023/08/fire-in-the-hole-gallery-1.jpg"
+    }
+  ]
+}

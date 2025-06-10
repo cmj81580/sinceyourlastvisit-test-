@@ -1,34 +1,60 @@
 {
   "sdc": [
     {
-      "title": "Fire in the Hole (2024)",
+      "title": "Fire in the Hole (New Version)",
       "date": "30/03/2024",
-      "description": "A reimagined indoor mine\u2011train coaster with modern effects, onboard audio, and splash finale.",
+      "status": "opened",
+      "description": "A reimagined version of the classic indoor coaster with advanced effects and storytelling.",
       "image": "https://www.silverdollarcity.com/wp-content/uploads/2023/08/fire-in-the-hole-gallery-1.jpg"
+    },
+    {
+      "title": "Fire in the Hole (Original)",
+      "date": "30/12/2023",
+      "status": "closed",
+      "description": "The original version of this iconic ride closed after more than 50 years of operation.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/4/48/Fire_in_the_Hole_Exterior.jpg"
     },
     {
       "title": "Mystic River Falls",
       "date": "21/07/2020",
-      "description": "River-raft adventure with a rotating elevator lift and the tallest raft-drop in the Western Hemisphere.",
+      "status": "opened",
+      "description": "A high-tech river rapids ride featuring the tallest raft drop in the Western Hemisphere.",
       "image": "https://upload.wikimedia.org/wikipedia/commons/9/92/Mystic_River_Falls_Silver_Dollar_City.jpg"
+    },
+    {
+      "title": "Lost River of the Ozarks",
+      "date": "15/08/2018",
+      "status": "closed",
+      "description": "A popular river rapids ride that was removed to make way for Mystic River Falls.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Lost_River_of_the_Ozarks.jpg"
     },
     {
       "title": "Time Traveler",
       "date": "14/03/2018",
-      "description": "World\u2019s fastest, tallest spinning coaster\u2014with double LSM launches, vertical loop, and 3 inversions.",
+      "status": "opened",
+      "description": "A record-breaking spinning coaster with launches and inversions through mountainous terrain.",
       "image": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Time_Traveler_Roller_Coaster.jpg"
     },
     {
       "title": "Outlaw Run",
       "date": "15/03/2013",
-      "description": "Groundbreaking wood coaster with 162\u2011ft drop, 3 inversions, and an 81\u00b0 first drop.",
+      "status": "opened",
+      "description": "An intense wooden coaster with multiple inversions and steep drops, themed to the Wild West.",
       "image": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Outlaw_Run_roller_coaster_at_Silver_Dollar_City_03.jpg"
     },
     {
-      "title": "Wildfire",
+      "title": "WildFire",
       "date": "04/04/2001",
-      "description": "B&M steel coaster featuring 5 inversions and a 155\u2011ft first drop\u2014set in an 1880s inventor\u2019s lab theme.",
+      "status": "opened",
+      "description": "A steel coaster with five inversions and sweeping views of the Ozark Mountains.",
       "image": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Wildfire_%28Silver_Dollar_City%29.jpg"
+    },
+    {
+      "title": "Fireman's Landing",
+      "date": "14/03/2015",
+      "status": "opened",
+      "description": "A family-themed area with 10 attractions inspired by 1880s fire-fighting lore.",
+      "image": "https://www.silverdollarcity.com/wp-content/uploads/2020/04/firemans-landing.jpg"
     }
   ]
 }

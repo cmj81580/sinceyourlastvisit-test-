@@ -1,4 +1,4 @@
-// Inline version of script.js to work on GitHub Pages without fetch()
+/ Inline version of script.js to work on GitHub Pages without fetch()
 
 const attractions = [
   {
@@ -58,4 +58,4 @@ document.getElementById("check-button").addEventListener("click", () => {
 
   document.getElementById("new-results").innerHTML = newAttractions.map(formatCard).join("") || "<p>No new attractions found.</p>";
   document.getElementById("closed-results").innerHTML = closedAttractions.map(formatCard).join("") || "<p>No closures found.</p>";
-};
+});

@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("showButton").addEventListener("click", filterAttractions);
+});
+
 async function filterAttractions() {
   const dateInput = document.getElementById("visitDate").value;
   if (!dateInput) return;
@@ -18,11 +22,10 @@ async function filterAttractions() {
           .map(cell => cell.replace(/^"|"$/g, "").trim())
       );
 
-    // Skip header row
-    const entries = rows.slice(1);
+    const entries = rows.slice(1); // skip header
 
     const filtered = entries
-      .filter(row => row[4]) // Opening Date
+      .filter(row => row[4]) // Opening Date must exist
       .filter(row => {
         const parts = row[4].split("/");
         if (!parts || parts.length !== 3) return false;

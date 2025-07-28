@@ -3,34 +3,73 @@ async function filterAttractions() {
   if (!dateInput) return;
 
   const visitDate = new Date(dateInput);
-  const response = await fetch("data.json");
-  const data = await response.json();
+  const sheetURL = "https://docs.google.com/spreadsheets/d/1AifnMTd7E5G06-pAU4np2kO_IjXSe9xiAJGbJlW_exc/gviz/tq?tqx=out:csv";
 
-  const newAttractions = data
-    .filter(item => item.status === "new" && new Date(item.date.split("/").reverse().join("-")) > visitDate)
-    .sort((a, b) => new Date(b.date.split("/").reverse().join("-")) - new Date(a.date.split("/").reverse().join("-")));
+  try {
+    const response = await fetch(sheetURL);
+    const csvText = await response.text();
 
-  const container = document.getElementById("attractionList");
-  container.innerHTML = "";
+    const rows = csvText
+      .trim()
+      .split("\n")
+      .map(r =>
+        r
+          .split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+          .map(cell => cell.replace(/^"|"$/g, "").trim())
+      );
 
-  if (newAttractions.length === 0) {
-    container.innerHTML = "<p>No new attractions since your last visit!</p>";
-    return;
+    const headers = rows[0].map(h => h.toLowerCase().replace(/\s+/g, ""));
+    const entries = rows.slice(1).map(row => {
+      const obj = {};
+      headers.forEach((header, i) => (obj[header] = row[i]));
+      return obj;
+    });
+
+    const filtered = entries
+      .filter(item => item.status?.toLowerCase() === "new")
+      .filter(item => {
+        const parts = item.date?.split("/");
+        if (!parts || parts.length !== 3) return false;
+        const itemDate = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+        return itemDate > visitDate;
+      })
+      .sort((a, b) => {
+        const aDate = new Date(a.date.split("/").reverse().join("-"));
+        const bDate = new Date(b.date.split("/").reverse().join("-"));
+        return bDate - aDate;
+      });
+
+    const container = document.getElementById("attractionList");
+    container.innerHTML = "";
+
+    if (filtered.length === 0) {
+      container.innerHTML = "<p>No new attractions since your last visit!</p>";
+      return;
+    }
+
+    filtered.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "attraction-card";
+
+      card.innerHTML = `
+        <img src="${item.image}" alt="${item.title}" />
+        <div class="info">
+          <h3>${item.title}</h3>
+          <p><strong>Opened:</strong> ${item.date}</p>
+          <p><strong>Type:</strong> ${item.type || "N/A"}</p>
+          <p><strong>Area:</strong> ${item.area || "N/A"}</p>
+          <p>${item.description}</p>
+          ${item.notes ? `<p><em>Note:</em> ${item.notes}</p>` : ""}
+          ${item.source ? `<p><a href="${item.source}" target="_blank">More info</a></p>` : ""}
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error("Error fetching or parsing data:", error);
+    const container = document.getElementById("attractionList");
+    container.innerHTML = "<p>Oops! We couldn't load updates from the database.</p>";
   }
-
-  newAttractions.forEach(attraction => {
-    const card = document.createElement("div");
-    card.className = "attraction-card";
-
-    card.innerHTML = `
-      <img src="${attraction.image}" alt="${attraction.title}" />
-      <div class="info">
-        <h3>${attraction.title}</h3>
-        <p><strong>Opened:</strong> ${attraction.date}</p>
-        <p>${attraction.description}</p>
-      </div>
-    `;
-
-    container.appendChild(card);
-  });
 }

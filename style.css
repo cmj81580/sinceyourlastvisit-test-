@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English&family=Spectral:wght@400;600&display=swap');
+
 body {
-  font-family: 'Georgia', serif;
+  font-family: 'Spectral', serif;
   background-color: #f5efe6;
   color: #3e2f1c;
   margin: 0;
   padding: 0;
+  line-height: 1.6;
 }
 
 header {
@@ -11,11 +14,13 @@ header {
   color: #fff8dc;
   text-align: center;
   padding: 2rem 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 header h1 {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
+  font-family: 'IM Fell English', serif;
   letter-spacing: 1px;
 }
 
@@ -25,65 +30,90 @@ header h1 {
 }
 
 main {
-  max-width: 800px;
+  max-width: 960px;
   margin: 2rem auto;
   padding: 1rem;
 }
 
 .input-section {
-  background-color: #fef3e2;
-  border: 2px solid #b87333;
-  padding: 1rem;
+  background-color: #fffaf3;
+  border-left: 6px solid #b87333;
+  padding: 1.2rem;
   border-radius: 8px;
   margin-bottom: 2rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
   text-align: center;
 }
 
 input[type="date"] {
-  padding: 0.5rem;
+  padding: 0.6rem;
   font-size: 1rem;
   margin: 0.5rem;
   border-radius: 4px;
   border: 1px solid #b87333;
+  background-color: #fff;
 }
 
 button {
   background-color: #b87333;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   font-size: 1rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-weight: bold;
 }
 
 button:hover {
-  background-color: #a85d20;
+  background-color: #a14f17;
 }
 
 #results h2 {
   border-bottom: 2px solid #b87333;
   padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
+  font-size: 1.6rem;
 }
 
 .attraction-card {
   display: flex;
+  flex-wrap: wrap;
   background-color: #fff8f0;
   border: 1px solid #b87333;
-  margin-bottom: 1rem;
-  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
   overflow: hidden;
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.1);
 }
 
 .attraction-card img {
-  width: 150px;
+  width: 100%;
+  max-width: 280px;
   height: auto;
   object-fit: cover;
+  flex: 1 1 280px;
 }
 
 .attraction-card .info {
-  padding: 1rem;
+  flex: 2 1 400px;
+  padding: 1rem 1.2rem;
+}
+
+.attraction-card .info h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #5a2c00;
+}
+
+.attraction-card .info a {
+  color: #a14f17;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.attraction-card .info a:hover {
+  text-decoration: underline;
 }
 
 footer {
@@ -92,4 +122,21 @@ footer {
   text-align: center;
   padding: 1rem;
   margin-top: 3rem;
+  font-size: 0.9rem;
+}
+
+/* Mobile Improvements */
+@media (max-width: 768px) {
+  .attraction-card {
+    flex-direction: column;
+  }
+
+  .attraction-card img {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .attraction-card .info {
+    padding: 1rem;
+  }
 }

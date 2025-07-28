@@ -18,29 +18,20 @@ async function filterAttractions() {
           .map(cell => cell.replace(/^"|"$/g, "").trim())
       );
 
-    const headers = rows[0].map(h =>
-      h.toLowerCase().replace(/\s+/g, "").replace(/[()]/g, "")
-    );
-
-    const entries = rows.slice(1).map(row => {
-      const obj = {};
-      headers.forEach((header, i) => {
-        obj[header] = row[i];
-      });
-      return obj;
-    });
+    // Skip header row
+    const entries = rows.slice(1);
 
     const filtered = entries
-      .filter(item => item.openingdate && item.name)
-      .filter(item => {
-        const parts = item.openingdate?.split("/");
+      .filter(row => row[4]) // Opening Date
+      .filter(row => {
+        const parts = row[4].split("/");
         if (!parts || parts.length !== 3) return false;
         const itemDate = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
         return itemDate > visitDate;
       })
       .sort((a, b) => {
-        const aDate = new Date(a.openingdate.split("/").reverse().join("-"));
-        const bDate = new Date(b.openingdate.split("/").reverse().join("-"));
+        const aDate = new Date(a[4].split("/").reverse().join("-"));
+        const bDate = new Date(b[4].split("/").reverse().join("-"));
         return bDate - aDate;
       });
 
@@ -52,20 +43,29 @@ async function filterAttractions() {
       return;
     }
 
-    filtered.forEach(item => {
+    filtered.forEach(row => {
+      const name = row[1];
+      const category = row[2];
+      const area = row[3];
+      const date = row[4];
+      const description = row[6];
+      const image = row[7];
+      const video = row[8];
+      const source = row[9];
+
       const card = document.createElement("div");
       card.className = "attraction-card";
 
       card.innerHTML = `
-        <img src="${item.image_url}" alt="${item.name}" />
+        <img src="${image}" alt="${name}" />
         <div class="info">
-          <h3>${item.name}</h3>
-          <p><strong>Opened:</strong> ${item.openingdate}</p>
-          <p><strong>Type:</strong> ${item.category || "N/A"}</p>
-          <p><strong>Area:</strong> ${item.parksection || "N/A"}</p>
-          <p>${item.description}</p>
-          ${item.video_url ? `<p><a href="${item.video_url}" target="_blank">Watch video</a></p>` : ""}
-          ${item.source ? `<p><a href="${item.source}" target="_blank">More info</a></p>` : ""}
+          <h3>${name}</h3>
+          <p><strong>Opened:</strong> ${date}</p>
+          <p><strong>Type:</strong> ${category || "N/A"}</p>
+          <p><strong>Area:</strong> ${area || "N/A"}</p>
+          <p>${description}</p>
+          ${video ? `<p><a href="${video}" target="_blank">Watch video</a></p>` : ""}
+          ${source ? `<p><a href="${source}" target="_blank">More info</a></p>` : ""}
         </div>
       `;
 

@@ -18,7 +18,7 @@ async function filterAttractions() {
           .map(cell => cell.replace(/^"|"$/g, "").trim())
       );
 
-    const headers = rows[0].map(h => h.toLowerCase().replace(/\s+/g, ""));
+    const headers = rows[0].map(h => h.toLowerCase().replace(/\s+/g, "").replace(/[()]/g, ""));
     const entries = rows.slice(1).map(row => {
       const obj = {};
       headers.forEach((header, i) => (obj[header] = row[i]));
@@ -26,16 +26,16 @@ async function filterAttractions() {
     });
 
     const filtered = entries
-      .filter(item => item.name && item.openingdate)
+      .filter(item => item.name && item.openingdateifapplicable)
       .filter(item => {
-        const parts = item.openingdate?.split("/");
+        const parts = item.openingdateifapplicable?.split("/");
         if (!parts || parts.length !== 3) return false;
         const itemDate = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
         return itemDate > visitDate;
       })
       .sort((a, b) => {
-        const aDate = new Date(a.openingdate.split("/").reverse().join("-"));
-        const bDate = new Date(b.openingdate.split("/").reverse().join("-"));
+        const aDate = new Date(a.openingdateifapplicable.split("/").reverse().join("-"));
+        const bDate = new Date(b.openingdateifapplicable.split("/").reverse().join("-"));
         return bDate - aDate;
       });
 
@@ -55,7 +55,7 @@ async function filterAttractions() {
         <img src="${item.image_url}" alt="${item.name}" />
         <div class="info">
           <h3>${item.name}</h3>
-          <p><strong>Opened:</strong> ${item.openingdate}</p>
+          <p><strong>Opened:</strong> ${item.openingdateifapplicable}</p>
           <p><strong>Type:</strong> ${item.category || "N/A"}</p>
           <p><strong>Area:</strong> ${item.parksection || "N/A"}</p>
           <p>${item.description}</p>

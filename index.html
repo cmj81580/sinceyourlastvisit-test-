@@ -3,35 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Since Your Last Visit</title>
+  <title>Since Your Last Visit – Silver Dollar City</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <h1>Since Your Last Visit</h1>
-    <p class="tagline">Your personalized ride through time.</p>
+    <p class="tagline">Your personalized ride through time</p>
   </header>
 
   <main>
-    <label for="last-visit">When did you last visit Silver Dollar City?</label>
-    <input type="date" id="last-visit" />
-    <button id="check-button">Show Changes</button>
-
-    <section id="new-section">
-      <h2>New Since Your Last Visit</h2>
-      <div id="new-results" class="results-grid"></div>
+    <section class="input-section">
+      <label for="visitDate">Enter your last visit date:</label>
+      <input type="date" id="visitDate" />
+      <button onclick="filterAttractions()">Show What's New</button>
     </section>
 
-    <section id="closed-section">
-      <h2>Closed Since Your Last Visit</h2>
-      <div id="closed-results" class="results-grid"></div>
+    <section id="results">
+      <h2>New Since Your Last Visit</h2>
+      <div id="attractionList"></div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Since Your Last Visit</p>
+    <p>Made with ❤️ for Silver Dollar City fans</p>
   </footer>
 
-  <script src="script.js" defer></script>
+  <script src="script.js"></script>
 </body>
 </html>

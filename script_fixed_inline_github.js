@@ -26,16 +26,16 @@ async function filterAttractions() {
     });
 
     const filtered = entries
-      .filter(item => item.status?.toLowerCase() === "new")
+      .filter(item => item.name && item.openingdate)
       .filter(item => {
-        const parts = item.date?.split("/");
+        const parts = item.openingdate?.split("/");
         if (!parts || parts.length !== 3) return false;
         const itemDate = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
         return itemDate > visitDate;
       })
       .sort((a, b) => {
-        const aDate = new Date(a.date.split("/").reverse().join("-"));
-        const bDate = new Date(b.date.split("/").reverse().join("-"));
+        const aDate = new Date(a.openingdate.split("/").reverse().join("-"));
+        const bDate = new Date(b.openingdate.split("/").reverse().join("-"));
         return bDate - aDate;
       });
 
@@ -52,15 +52,14 @@ async function filterAttractions() {
       card.className = "attraction-card";
 
       card.innerHTML = `
-        <img src="${item.image}" alt="${item.title}" />
+        <img src="${item.image_url}" alt="${item.name}" />
         <div class="info">
-          <h3>${item.title}</h3>
-          <p><strong>Opened:</strong> ${item.date}</p>
-          <p><strong>Type:</strong> ${item.type || "N/A"}</p>
-          <p><strong>Area:</strong> ${item.area || "N/A"}</p>
+          <h3>${item.name}</h3>
+          <p><strong>Opened:</strong> ${item.openingdate}</p>
+          <p><strong>Type:</strong> ${item.category || "N/A"}</p>
+          <p><strong>Area:</strong> ${item.parksection || "N/A"}</p>
           <p>${item.description}</p>
-          ${item.notes ? `<p><em>Note:</em> ${item.notes}</p>` : ""}
-          ${item.source ? `<p><a href="${item.source}" target="_blank">More info</a></p>` : ""}
+          ${item.video_url ? `<p><a href="${item.video_url}" target="_blank">Watch video</a></p>` : ""}
         </div>
       `;
 

@@ -18,24 +18,29 @@ async function filterAttractions() {
           .map(cell => cell.replace(/^"|"$/g, "").trim())
       );
 
-    const headers = rows[0].map(h => h.toLowerCase().replace(/\s+/g, "").replace(/[()]/g, ""));
+    const headers = rows[0].map(h =>
+      h.toLowerCase().replace(/\s+/g, "").replace(/[()]/g, "")
+    );
+
     const entries = rows.slice(1).map(row => {
       const obj = {};
-      headers.forEach((header, i) => (obj[header] = row[i]));
+      headers.forEach((header, i) => {
+        obj[header] = row[i];
+      });
       return obj;
     });
 
     const filtered = entries
-      .filter(item => item.name && item.openingdateifapplicable)
+      .filter(item => item.openingdate && item.name)
       .filter(item => {
-        const parts = item.openingdateifapplicable?.split("/");
+        const parts = item.openingdate?.split("/");
         if (!parts || parts.length !== 3) return false;
         const itemDate = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
         return itemDate > visitDate;
       })
       .sort((a, b) => {
-        const aDate = new Date(a.openingdateifapplicable.split("/").reverse().join("-"));
-        const bDate = new Date(b.openingdateifapplicable.split("/").reverse().join("-"));
+        const aDate = new Date(a.openingdate.split("/").reverse().join("-"));
+        const bDate = new Date(b.openingdate.split("/").reverse().join("-"));
         return bDate - aDate;
       });
 
@@ -55,11 +60,12 @@ async function filterAttractions() {
         <img src="${item.image_url}" alt="${item.name}" />
         <div class="info">
           <h3>${item.name}</h3>
-          <p><strong>Opened:</strong> ${item.openingdateifapplicable}</p>
+          <p><strong>Opened:</strong> ${item.openingdate}</p>
           <p><strong>Type:</strong> ${item.category || "N/A"}</p>
           <p><strong>Area:</strong> ${item.parksection || "N/A"}</p>
           <p>${item.description}</p>
           ${item.video_url ? `<p><a href="${item.video_url}" target="_blank">Watch video</a></p>` : ""}
+          ${item.source ? `<p><a href="${item.source}" target="_blank">More info</a></p>` : ""}
         </div>
       `;
 
